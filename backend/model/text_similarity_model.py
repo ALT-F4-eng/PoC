@@ -18,7 +18,7 @@ class Text_Similarity_model:
     
 
     def count_math(self, sentence:str) -> int:
-        math_characters = set("+-*/%^=<>")
+        math_characters:set[str] = set("+-*/%^=<>")
         count_numbers:int = 0
         count_characters:int = 0
         mem_numer:list[str] = []
