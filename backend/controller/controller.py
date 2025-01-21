@@ -12,3 +12,9 @@ class Controller:
     def load(self):
         return self.dataset.load_json()
     
+    def load_questions(self):
+        return self.dataset.load_questions()
+    
+    def ask(self, sentence):
+        return self.api_llm.ask(sentence)
+    

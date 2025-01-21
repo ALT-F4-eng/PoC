@@ -11,9 +11,9 @@ class Test_view:
 
     @staticmethod
     def get():
-        dataset:dict = Controller().load()
-        Controller().ask(dataset)         #DA QUI IN POI
-        return dataset
+        dataset:dict = Controller().load_questions()
+        answers = Controller().ask(dataset) 
+        return answers        #DA QUI IN POI
 
     @staticmethod
     def post():

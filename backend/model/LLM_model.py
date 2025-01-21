@@ -17,7 +17,12 @@ class LLM_model:
         client = Client()
         response = client.chat.completions.create(
             model="gpt-4o-mini",
-            messages=[{"role": "user", "content": sentence}],
+            messages=[{"role": "user", "content": f"Rispondi direttamente alle seguenti domande, usando la stessa lingua della domanda, senza introduzione: {sentence}"}],
             web_search = False
         )
-        print(response.choices[0].message.content)
+        reply = response.choices[0].message.content.strip()
+        print(reply)
+        return reply
+
+#specificare la lingua in italiano per le risposte llm
+#passare al llm solo le domande dal json e fare tornare solo le risposte
