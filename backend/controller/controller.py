@@ -28,5 +28,3 @@ class Controller:
     
     def categorize(self, questions:list[str], true_answers:list[str], generated_answers:list[str]) -> list[dict]:
         return self.similarity.categorize(questions, true_answers, generated_answers)
-
-    
