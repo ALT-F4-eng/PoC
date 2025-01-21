@@ -14,7 +14,7 @@ class Dataset_view:
 
     @staticmethod
     def get():
-        data = Controller().load()
+        data:list[dict[str, str]] = Controller().load()
         return jsonify(data)
 
     @staticmethod
@@ -24,5 +24,5 @@ class Dataset_view:
     
     @staticmethod
     def delete():
-        data = Controller().delete()
+        data:dict[str, bool, str, str] = Controller().delete()
         return jsonify(data)
