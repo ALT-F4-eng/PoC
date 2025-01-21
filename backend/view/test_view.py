@@ -7,7 +7,8 @@ from backend.controller.controller import Controller
 class Test_view:
     @staticmethod
     def register(app):
-        app.add_url_rule('/test', 'test', Test_view.get, methods=['GET', 'POST'])
+        app.add_url_rule('/test', 'test_get', Test_view.get, methods=['GET'])
+        app.add_url_rule('/test', 'test_post', Test_view.post, methods=['POST'])
 
     @staticmethod
     def test(dataset):

@@ -1,30 +1,29 @@
-from flask import render_template, request, jsonify
+from flask import request, jsonify
 import json
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from backend.controller.controller import Controller
 
 class Dataset_view:
     
     @staticmethod
     def register(app):
-        app.add_url_rule('/load', 'dataset_loading', Dataset_view.get, methods=['GET'])
-        app.add_url_rule('/save', 'dataset_saving', Dataset_view.post, methods=['POST'])
-
-    @staticmethod
-    def load_json(file_path):
-        try:
-            with open(file_path, 'r', encoding='utf-8') as file:
-                data = json.load(file)
-                return data
-        except FileNotFoundError:
-            print(f"Errore: Il file '{file_path}' non esiste.")
-        except json.JSONDecodeError as e:
-            print(f"Errore: Il file '{file_path}' non è un JSON valido. {e}")
-        return None
+        app.add_url_rule('/dataset/load', 'dataset_loading', Dataset_view.get, methods=['GET'])
+        app.add_url_rule('/dataset/save', 'dataset_saving', Dataset_view.post, methods=['POST'])
+        app.add_url_rule('/dataset/delete', 'dataset_deleting', Dataset_view.delete, methods=['DELETE'])
 
     @staticmethod
     def get():
-        data = Dataset_view.load_json('Dataset\dataset.json')
+        data = Controller().load()
         return jsonify(data)
 
     @staticmethod
     def post():
-        return {"message":"salvataggio avvenuto con successo!"}
+        data:list[dict[str, str]] = Controller().save(request.get_json()) 
+        return jsonify(data)
+    
+    @staticmethod
+    def delete():
+        data = Controller().delete()
+        return jsonify(data)

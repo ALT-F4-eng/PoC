@@ -17,6 +17,12 @@ class Controller:
     def load_questions(self) -> list[str]:
         return self.dataset.load_questions()
     
+    def save(self, data) -> dict[str, bool, str, str]:
+        return self.dataset.write_json(data)
+
+    def delete(self) -> dict[str, bool, str, str]:
+        return self.dataset.delete_json()
+    
     def ask(self, questions:list[str]) -> list[str]:
         return self.api_llm.ask(questions)
     
