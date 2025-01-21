@@ -1,2 +1,4 @@
 Flask
 g4f[all]
+ast
+sentence_transformers
