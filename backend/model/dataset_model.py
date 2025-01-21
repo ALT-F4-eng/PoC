@@ -23,21 +23,3 @@ class Dataset_model:
         else:
             print("Errore: Il file JSON non contiene una lista di oggetti.")
         return []
-    
-    def write_json(self, content: list[dict[str, str]])  -> dict[str, bool, str, str]:
-        try:
-            with open(self.path, 'w', encoding='utf-8') as file:
-                json.dump(content, file, ensure_ascii=False, indent=4)
-                return {'status': True, 'error':''}
-        except Exception as e:
-            return {'status': False, 'error': e}
-
-    def delete_json(self) -> dict[str, bool, str, str]:
-        try:
-            if os.path.exists(self.path):
-                os.remove(self.path)
-                return {'status': True, 'error':''}
-            else:
-                return {'status': False, 'error':'file doesn\'t exist'}
-        except Exception as e:
-            return {'status': False, 'error':e}
