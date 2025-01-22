@@ -20,10 +20,16 @@ class Test_view:
 
     @staticmethod
     def get():
-        dataset:list[dict[str, str]] = Controller().load()
-        return Test_view.test(dataset)
+        try:
+            dataset:list[dict[str, str]] = Controller().load()
+            return Test_view.test(dataset)
+        except Exception as e:
+            return jsonify({'status':False, 'message':str(e)})
 
     @staticmethod
     def post():
-        dataset:list[dict[str, str]] = request.get_json()
-        return Test_view.test(dataset)
+        try:
+            dataset:list[dict[str, str]] = request.get_json()
+            return Test_view.test(dataset)
+        except Exception as e:
+            return jsonify({'status':False, 'message':str(e)})
