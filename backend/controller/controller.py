@@ -18,3 +18,9 @@ class Controller:
 
     def delete(self) -> dict[str, bool, str, str]:
         return self.dataset.delete_json()
+    
+    def pop_item(self, id:int) -> dict[str, bool, str, str]:
+        return self.dataset.pop_item(id)
+    
+    def modify_item(self, id:int, new_question:str, new_answer:str) -> dict[str, bool, str, str]:
+        return self.dataset.modify_item(id, new_question, new_answer)
