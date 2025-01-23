@@ -1,123 +1,122 @@
 [
-    {
-      "domanda": "Qual è la capitale d'Italia?",
-      "risposta attesa": "Roma"
-    },
-    {
-      "domanda": "Quanto fa 5 + 3?",
-      "risposta attesa": "8"
-    },
-    {
-      "domanda": "Chi ha scritto 'La Divina Commedia'?",
-      "risposta attesa": "Dante Alighieri"
-    },
-    {
-      "domanda": "Qual è il pianeta più grande del sistema solare?",
-      "risposta attesa": "Giove"
-    },
-    {
-      "domanda": "In che anno è avvenuto il primo allunaggio?",
-      "risposta attesa": "1969"
-    },
-    {
-      "domanda": "Qual è il colore primario tra rosso, verde e viola?",
-      "risposta attesa": "Rosso"
-    },
-    {
-      "domanda": "Quanti giorni ci sono in un anno bisestile?",
-      "risposta attesa": "366"
-    },
-    {
-      "domanda": "Chi ha dipinto la Gioconda?",
-      "risposta attesa": "Leonardo da Vinci"
-    },
-    {
-      "domanda": "Come si chiama il processo con cui le piante producono ossigeno?",
-      "risposta attesa": "Fotosintesi"
-    },
-    {
-      "domanda": "Qual è l'elemento chimico con simbolo H?",
-      "risposta attesa": "Idrogeno"
-    },
-    {
-        "domanda": "Spiega brevemente il significato della rivoluzione industriale.",
-        "risposta attesa": "La rivoluzione industriale è stata un periodo di cambiamenti economici, sociali e tecnologici avvenuto tra il XVIII e il XIX secolo, caratterizzato dall'introduzione di macchinari industriali, dall'uso di nuove fonti di energia come il carbone e il vapore, e dalla nascita delle fabbriche."
-    },
-    {
-      "domanda": "Quali sono le cause principali del cambiamento climatico?",
-      "risposta attesa": "Le cause principali del cambiamento climatico includono l'aumento delle emissioni di gas serra dovute alle attività umane, come la combustione di combustibili fossili, la deforestazione, l'agricoltura intensiva e l'industrializzazione. Questi fattori portano all'incremento dell'effetto serra e al riscaldamento globale."
-    },
-    {
-      "domanda": "Descrivi il ciclo dell'acqua.",
-      "risposta attesa": "Il ciclo dell'acqua è un processo naturale in cui l'acqua si muove continuamente attraverso l'atmosfera, la superficie terrestre e gli oceani. Comprende l'evaporazione dai mari, laghi e fiumi, la condensazione del vapore acqueo in nuvole, la precipitazione sotto forma di pioggia o neve, e l'infiltrazione o il deflusso verso corpi idrici, da cui il ciclo ricomincia."
-    },
-    {
-      "domanda": "Quali furono le conseguenze della Seconda Guerra Mondiale?",
-      "risposta attesa": "Le conseguenze della Seconda Guerra Mondiale furono molteplici e includono la divisione del mondo in due blocchi ideologici principali (capitalismo e comunismo), la nascita delle Nazioni Unite, la ricostruzione dell'Europa attraverso il Piano Marshall, il decolonialismo in molte parti del mondo, e un impatto devastante in termini di perdite umane, distruzioni materiali e traumi sociali."
-    },
-    {
-      "domanda": "Qual è la differenza tra DNA e RNA?",
-      "risposta attesa": "Il DNA (acido desossiribonucleico) è una molecola a doppia elica che contiene le informazioni genetiche degli organismi viventi. L'RNA (acido ribonucleico), invece, è generalmente a singolo filamento e ha ruoli diversi, tra cui trasportare le istruzioni del DNA per la sintesi delle proteine. Inoltre, il DNA utilizza il desossiribosio come zucchero, mentre l'RNA utilizza il ribosio, e nel DNA la base azotata timina è sostituita dall'uracile nell'RNA."
-    },
-    {
-      "domanda": "Cos'è e come funziona Internet?",
-      "risposta attesa": "Internet è una rete globale di computer interconnessi che consente lo scambio di dati e informazioni. Funziona grazie a protocolli come TCP/IP, che stabiliscono come i dati vengono trasmessi e ricevuti tra i dispositivi. Gli utenti accedono a contenuti e servizi attraverso applicazioni come browser, email o software specifici, collegati tramite cavi, satelliti o reti wireless."
-    },
-    {
-      "domanda": "Quali sono le principali caratteristiche del sistema solare?",
-      "risposta attesa": "Il sistema solare è composto dal Sole, che è una stella, e da otto pianeti principali: Mercurio, Venere, Terra, Marte, Giove, Saturno, Urano e Nettuno. Include anche lune, asteroidi, comete, polveri e la fascia di Kuiper. I pianeti orbitano intorno al Sole grazie alla sua forza gravitazionale, e la distanza tra loro varia significativamente."
-    },
-    {
-      "domanda": "Che cos'è la teoria dell'evoluzione di Darwin?",
-      "risposta attesa": "La teoria dell'evoluzione di Charles Darwin sostiene che le specie si evolvono nel tempo attraverso un processo di selezione naturale. Gli individui con caratteristiche più adatte all'ambiente hanno maggiori probabilità di sopravvivere e riprodursi, trasmettendo i loro geni alle generazioni successive, portando gradualmente a cambiamenti nella popolazione."
-    },
-    {
-      "domanda": "Qual è la struttura dell'Unione Europea?",
-      "risposta attesa": "L'Unione Europea è un'organizzazione politico-economica composta da 27 Stati membri. Ha diverse istituzioni principali, tra cui il Parlamento Europeo, il Consiglio dell'Unione Europea, la Commissione Europea, la Corte di Giustizia e la Banca Centrale Europea. Ogni istituzione ha un ruolo specifico, come legiferare, eseguire politiche o garantire la giustizia e la stabilità economica."
-    },
-    {
-      "domanda": "Cosa si intende per sostenibilità ambientale?",
-      "risposta attesa": "La sostenibilità ambientale è la capacità di soddisfare i bisogni delle generazioni attuali senza compromettere la possibilità delle future generazioni di soddisfare i propri. Implica la gestione responsabile delle risorse naturali, la riduzione dell'inquinamento e l'adozione di pratiche che proteggano l'ecosistema e la biodiversità."
-    },
-    {
-      "domanda": "2^n è minore uguale di n!?",
-      "risposta attesa": "Per dimostrare la disuguaglianza 2^n ≤ n! per n ≥ 4 con il metodo dell'induzione, seguiamo questi passi: Base dell'induzione: Verifichiamo la disuguaglianza per il caso base n = 4. 2^4 = 16 e 4! = 24. Poiché 16 ≤ 24, la disuguaglianza è vera per n = 4. Passo induttivo: Supponiamo che la disuguaglianza sia vera per un certo k ≥ 4, cioè che: 2^k ≤ k! Vogliamo dimostrare che la disuguaglianza è vera anche per k + 1, cioè che: 2^(k+1) ≤ (k+1)! Partiamo dal lato sinistro della disuguaglianza: 2^(k+1) = 2 * 2^k Per l'ipotesi induttiva, sappiamo che 2^k ≤ k!, quindi: 2^(k+1) = 2 * 2^k ≤ 2 * k! Ora dobbiamo confrontare 2 * k! con (k+1)!. Ricordiamo che: (k+1)! = (k+1) * k! Poiché k+1 ≥ 2 per k ≥ 4, abbiamo: 2 * k! ≤ (k+1) * k! = (k+1)! Pertanto, abbiamo dimostrato che: 2^(k+1) ≤ (k+1)! Conclusione: Per il principio di induzione matematica, la disuguaglianza 2^n ≤ n! è vera per tutti i n ≥ 4."
-    },
-    {
-      "domanda": "Quando è nato J.F.Kennedy?",
-      "risposta attesa": "29 Maggio 1927."
-    },
-    {
-      "domanda": "Cos'è un polimero?",
-      "risposta attesa": "Un polimero è una macromolecola, ovvero una molecola dall'elevato peso molecolare, costituita da un gran numero di gruppi molecolari uguali o diversi, uniti 'a catena' mediante la ripetizione dello stesso tipo di legame."
-    },
-    {
-      "domanda": "Dove si trova l'Alaska?",
-      "risposta attesa": "Si trova nella estremità nordoccidentale del continente americano."
-    },
-    {
-      "domanda": "Come riesce Harry Potter a prendere il boccino d'oro?",
-      "risposta attesa": "Riesce a prendere il boccino d'oro lanciandosi dalla sua scopa e prendendolo con la bocca."
-    },
-    {
-      "domanda": "Quanto costa in media una casa di 100 m2 in Germania?",
-      "risposta attesa": "Una casa in Germania costa 2857 €/m2 dunque una casa di 100 m2 costerebbe in media 285700 €."
-    },
-    {
-      "domanda": "Come viene fatta la plastica?",
-      "risposta attesa": "La plastica si ottiene da composti di carbonio e idrogeno chiamati monomeri. Si ricavano dal petrolio e dal metano. I monomeri si possono immaginare come un agglomerato di particelle davvero piccolissime che, attraverso processi chimici complessi, si uniscono tra di loro e formano lunghe catene chiamate polimeri."
-    },
-    {
-      "domanda": "Di che colore sono le caramelle Mou?",
-      "risposta attesa": "Sono di color ambrato, per esattezza color caramello bruno."
-    },
-    {
-      "domanda": "Di dov'era Neil Armstrong?",
-      "risposta attesa": "Wapakoneta, Ohio, Stati Uniti."
-    },
-    {
-      "domanda": "Cosa posso fare per riparare un telefono finito in acqua?",
-      "risposta attesa": "È meglio spegnerlo e non tentare di riaccenderlo immediatamente. Estrarre subito caricatore, custodia, scheda sim e scheda sd. Asciugare il telefono il più possibile con molta delicatezza, con un panno di cotone o con carta assorbente. Lasciarlo ad asciugare, senza accenderlo, per almeno 24 ore d'estate e 48-72 ore d'inverno."
-    }
-  ]
-  
+  {
+    "domanda": "Qual è la capitale d'Italia?",
+    "rispostaAttesa": "Roma"
+  },
+  {
+    "domanda": "Quanto fa 5 + 3?",
+    "rispostaAttesa": "8"
+  },
+  {
+    "domanda": "Chi ha scritto 'La Divina Commedia'?",
+    "rispostaAttesa": "Dante Alighieri"
+  },
+  {
+    "domanda": "Qual è il pianeta più grande del sistema solare?",
+    "rispostaAttesa": "Giove"
+  },
+  {
+    "domanda": "In che anno è avvenuto il primo allunaggio?",
+    "rispostaAttesa": "1969"
+  },
+  {
+    "domanda": "Qual è il colore primario tra rosso, verde e viola?",
+    "rispostaAttesa": "Rosso"
+  },
+  {
+    "domanda": "Quanti giorni ci sono in un anno bisestile?",
+    "rispostaAttesa": "366"
+  },
+  {
+    "domanda": "Chi ha dipinto la Gioconda?",
+    "rispostaAttesa": "Leonardo da Vinci"
+  },
+  {
+    "domanda": "Come si chiama il processo con cui le piante producono ossigeno?",
+    "rispostaAttesa": "Fotosintesi"
+  },
+  {
+    "domanda": "Qual è l'elemento chimico con simbolo H?",
+    "rispostaAttesa": "Idrogeno"
+  },
+  {
+      "domanda": "Spiega brevemente il significato della rivoluzione industriale.",
+      "rispostaAttesa": "La rivoluzione industriale è stata un periodo di cambiamenti economici, sociali e tecnologici avvenuto tra il XVIII e il XIX secolo, caratterizzato dall'introduzione di macchinari industriali, dall'uso di nuove fonti di energia come il carbone e il vapore, e dalla nascita delle fabbriche."
+  },
+  {
+    "domanda": "Quali sono le cause principali del cambiamento climatico?",
+    "rispostaAttesa": "Le cause principali del cambiamento climatico includono l'aumento delle emissioni di gas serra dovute alle attività umane, come la combustione di combustibili fossili, la deforestazione, l'agricoltura intensiva e l'industrializzazione. Questi fattori portano all'incremento dell'effetto serra e al riscaldamento globale."
+  },
+  {
+    "domanda": "Descrivi il ciclo dell'acqua.",
+    "rispostaAttesa": "Il ciclo dell'acqua è un processo naturale in cui l'acqua si muove continuamente attraverso l'atmosfera, la superficie terrestre e gli oceani. Comprende l'evaporazione dai mari, laghi e fiumi, la condensazione del vapore acqueo in nuvole, la precipitazione sotto forma di pioggia o neve, e l'infiltrazione o il deflusso verso corpi idrici, da cui il ciclo ricomincia."
+  },
+  {
+    "domanda": "Quali furono le conseguenze della Seconda Guerra Mondiale?",
+    "rispostaAttesa": "Le conseguenze della Seconda Guerra Mondiale furono molteplici e includono la divisione del mondo in due blocchi ideologici principali (capitalismo e comunismo), la nascita delle Nazioni Unite, la ricostruzione dell'Europa attraverso il Piano Marshall, il decolonialismo in molte parti del mondo, e un impatto devastante in termini di perdite umane, distruzioni materiali e traumi sociali."
+  },
+  {
+    "domanda": "Qual è la differenza tra DNA e RNA?",
+    "rispostaAttesa": "Il DNA (acido desossiribonucleico) è una molecola a doppia elica che contiene le informazioni genetiche degli organismi viventi. L'RNA (acido ribonucleico), invece, è generalmente a singolo filamento e ha ruoli diversi, tra cui trasportare le istruzioni del DNA per la sintesi delle proteine. Inoltre, il DNA utilizza il desossiribosio come zucchero, mentre l'RNA utilizza il ribosio, e nel DNA la base azotata timina è sostituita dall'uracile nell'RNA."
+  },
+  {
+    "domanda": "Cos'è e come funziona Internet?",
+    "rispostaAttesa": "Internet è una rete globale di computer interconnessi che consente lo scambio di dati e informazioni. Funziona grazie a protocolli come TCP/IP, che stabiliscono come i dati vengono trasmessi e ricevuti tra i dispositivi. Gli utenti accedono a contenuti e servizi attraverso applicazioni come browser, email o software specifici, collegati tramite cavi, satelliti o reti wireless."
+  },
+  {
+    "domanda": "Quali sono le principali caratteristiche del sistema solare?",
+    "rispostaAttesa": "Il sistema solare è composto dal Sole, che è una stella, e da otto pianeti principali: Mercurio, Venere, Terra, Marte, Giove, Saturno, Urano e Nettuno. Include anche lune, asteroidi, comete, polveri e la fascia di Kuiper. I pianeti orbitano intorno al Sole grazie alla sua forza gravitazionale, e la distanza tra loro varia significativamente."
+  },
+  {
+    "domanda": "Che cos'è la teoria dell'evoluzione di Darwin?",
+    "rispostaAttesa": "La teoria dell'evoluzione di Charles Darwin sostiene che le specie si evolvono nel tempo attraverso un processo di selezione naturale. Gli individui con caratteristiche più adatte all'ambiente hanno maggiori probabilità di sopravvivere e riprodursi, trasmettendo i loro geni alle generazioni successive, portando gradualmente a cambiamenti nella popolazione."
+  },
+  {
+    "domanda": "Qual è la struttura dell'Unione Europea?",
+    "rispostaAttesa": "L'Unione Europea è un'organizzazione politico-economica composta da 27 Stati membri. Ha diverse istituzioni principali, tra cui il Parlamento Europeo, il Consiglio dell'Unione Europea, la Commissione Europea, la Corte di Giustizia e la Banca Centrale Europea. Ogni istituzione ha un ruolo specifico, come legiferare, eseguire politiche o garantire la giustizia e la stabilità economica."
+  },
+  {
+    "domanda": "Cosa si intende per sostenibilità ambientale?",
+    "rispostaAttesa": "La sostenibilità ambientale è la capacità di soddisfare i bisogni delle generazioni attuali senza compromettere la possibilità delle future generazioni di soddisfare i propri. Implica la gestione responsabile delle risorse naturali, la riduzione dell'inquinamento e l'adozione di pratiche che proteggano l'ecosistema e la biodiversità."
+  },
+  {
+    "domanda": "2^n è minore uguale di n!?",
+    "rispostaAttesa": "Per dimostrare la disuguaglianza 2^n ≤ n! per n ≥ 4 con il metodo dell'induzione, seguiamo questi passi: Base dell'induzione: Verifichiamo la disuguaglianza per il caso base n = 4. 2^4 = 16 e 4! = 24. Poiché 16 ≤ 24, la disuguaglianza è vera per n = 4. Passo induttivo: Supponiamo che la disuguaglianza sia vera per un certo k ≥ 4, cioè che: 2^k ≤ k! Vogliamo dimostrare che la disuguaglianza è vera anche per k + 1, cioè che: 2^(k+1) ≤ (k+1)! Partiamo dal lato sinistro della disuguaglianza: 2^(k+1) = 2 * 2^k Per l'ipotesi induttiva, sappiamo che 2^k ≤ k!, quindi: 2^(k+1) = 2 * 2^k ≤ 2 * k! Ora dobbiamo confrontare 2 * k! con (k+1)!. Ricordiamo che: (k+1)! = (k+1) * k! Poiché k+1 ≥ 2 per k ≥ 4, abbiamo: 2 * k! ≤ (k+1) * k! = (k+1)! Pertanto, abbiamo dimostrato che: 2^(k+1) ≤ (k+1)! Conclusione: Per il principio di induzione matematica, la disuguaglianza 2^n ≤ n! è vera per tutti i n ≥ 4."
+  },
+  {
+    "domanda": "Quando è nato J.F.Kennedy?",
+    "rispostaAttesa": "29 Maggio 1927."
+  },
+  {
+    "domanda": "Cos'è un polimero?",
+    "rispostaAttesa": "Un polimero è una macromolecola, ovvero una molecola dall'elevato peso molecolare, costituita da un gran numero di gruppi molecolari uguali o diversi, uniti 'a catena' mediante la ripetizione dello stesso tipo di legame."
+  },
+  {
+    "domanda": "Dove si trova l'Alaska?",
+    "rispostaAttesa": "Si trova nella estremità nordoccidentale del continente americano."
+  },
+  {
+    "domanda": "Come riesce Harry Potter a prendere il boccino d'oro?",
+    "rispostaAttesa": "Riesce a prendere il boccino d'oro lanciandosi dalla sua scopa e prendendolo con la bocca."
+  },
+  {
+    "domanda": "Quanto costa in media una casa di 100 m2 in Germania?",
+    "rispostaAttesa": "Una casa in Germania costa 2857 €/m2 dunque una casa di 100 m2 costerebbe in media 285700 €."
+  },
+  {
+    "domanda": "Come viene fatta la plastica?",
+    "rispostaAttesa": "La plastica si ottiene da composti di carbonio e idrogeno chiamati monomeri. Si ricavano dal petrolio e dal metano. I monomeri si possono immaginare come un agglomerato di particelle davvero piccolissime che, attraverso processi chimici complessi, si uniscono tra di loro e formano lunghe catene chiamate polimeri."
+  },
+  {
+    "domanda": "Di che colore sono le caramelle Mou?",
+    "rispostaAttesa": "Sono di color ambrato, per esattezza color caramello bruno."
+  },
+  {
+    "domanda": "Di dov'era Neil Armstrong?",
+    "rispostaAttesa": "Wapakoneta, Ohio, Stati Uniti."
+  },
+  {
+    "domanda": "Cosa posso fare per riparare un telefono finito in acqua?",
+    "rispostaAttesa": "È meglio spegnerlo e non tentare di riaccenderlo immediatamente. Estrarre subito caricatore, custodia, scheda sim e scheda sd. Asciugare il telefono il più possibile con molta delicatezza, con un panno di cotone o con carta assorbente. Lasciarlo ad asciugare, senza accenderlo, per almeno 24 ore d'estate e 48-72 ore d'inverno."
+  }
+]
