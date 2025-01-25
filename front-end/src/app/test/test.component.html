@@ -1,0 +1,28 @@
+<div style="text-align: center;">
+    <h1>Benvenuto nella pagina di Test!</h1>
+    <a href="/">Vai alla pagina Home</a>
+</div>
+<div>
+<ul>
+<li>Average: {{ average }}</li>
+<li>Deviation: {{ deviation }}</li>
+</ul>
+</div>
+<div class="chart-container">
+<canvas baseChart
+    [data]="chartData_1"
+    [options]="chartOptions_1"
+    [type]="scatterChartType"
+    chartType="scatter">
+</canvas>
+</div>
+<div class="chart-container">
+<canvas baseChart
+    [data]="chartData_2"
+    [options]="chartOptions_2"
+    [type]="barChartType"
+    chartType="bar">
+</canvas>
+</div>
+
+
