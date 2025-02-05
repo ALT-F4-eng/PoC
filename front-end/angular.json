@@ -9,7 +9,7 @@
         "@schematics/angular:component": {
           "inlineTemplate": false,
           "inlineStyle": false,
-          "skipTests": false
+          "skipTests": true
         },
         "@schematics/angular:class": {
           "skipTests": true
@@ -59,8 +59,13 @@
               }
             ],
             "styles": [
+<<<<<<< HEAD
               "src/theme.less",
               "src/styles.css"
+=======
+              "src/styles.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+>>>>>>> feature/#1
             ],
             "scripts": []
           },
@@ -105,5 +110,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "4b6bf598-4a5f-443c-91e3-95d9cdbf2ede"
   }
 }
