@@ -6,6 +6,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { FormComponent } from "../form/form.component";
 
 interface QA {
   domanda: string;
@@ -14,7 +15,7 @@ interface QA {
 
 @Component({
   selector: "app-lista",
-  imports: [CommonModule,NzButtonModule,NzModalModule,NzPaginationModule],
+  imports: [CommonModule,NzButtonModule,NzModalModule,NzPaginationModule,FormComponent],
   templateUrl: "./lista.component.html",
   styleUrl: "./lista.component.css",
 })
@@ -28,8 +29,9 @@ export class ListaComponent {
   size: NzButtonSize = 'large';
 
   constructor(private http: HttpClient,private modal: NzModalService) {
-    this.loadJsonData();
+   this.loadJsonData();
   }
+
   addQA(newQA: { domanda: string; risposta: string }) {
     this.qaList.push({
       domanda: newQA.domanda,
@@ -37,6 +39,7 @@ export class ListaComponent {
     });
     this.updatePaginatedList();
   }
+
   editQA(index: number) {
     const updatedQuestion = prompt(
       "Modifica la domanda:",
@@ -56,15 +59,15 @@ export class ListaComponent {
     }
   }
 
-  deleteQA(index: number) {
+  deleteQA(pageIndex: number) {
+    const globalIndex = (this.currentPage - 1) * this.pageSize + pageIndex;
     this.modal.confirm({
       nzTitle: 'Sei sicuro di cancellare la domanda e la risposta',
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
-        // Handle deletion of QA
-        this.qaList.splice(index, 1);  // Correct use of array method
+        this.qaList.splice(globalIndex, 1);
         this.updatePaginatedList();
       }
     });
