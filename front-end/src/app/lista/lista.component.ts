@@ -30,7 +30,13 @@ export class ListaComponent {
   constructor(private http: HttpClient,private modal: NzModalService) {
     this.loadJsonData();
   }
-
+  addQA(newQA: { domanda: string; risposta: string }) {
+    this.qaList.push({
+      domanda: newQA.domanda,
+      rispostaAttesa: newQA.risposta
+    });
+    this.updatePaginatedList();
+  }
   editQA(index: number) {
     const updatedQuestion = prompt(
       "Modifica la domanda:",
@@ -93,4 +99,5 @@ export class ListaComponent {
     //console.log('Loaded page:', page);
     this.updatePaginatedList();
   }
+  
 }
