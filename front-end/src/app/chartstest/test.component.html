@@ -9,19 +9,22 @@
 </ul>
 </div>
 <div class="chart-container">
-<canvas baseChart
-    [data]="chartData_1"
+    <canvas baseChart
+    [datasets]="chartData_1.datasets"
     [options]="chartOptions_1"
     [type]="scatterChartType"
-    chartType="scatter">
+    chatType="scatter"
+    (chartClick)="chartClicked($event)">
 </canvas>
+
 </div>
 <div class="chart-container">
 <canvas baseChart
     [data]="chartData_2"
     [options]="chartOptions_2"
     [type]="barChartType"
-    chartType="bar">
+    chartType="bar"
+    (chartClick)="chartClicked($event)">
 </canvas>
 </div>
 

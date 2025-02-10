@@ -1,8 +1,11 @@
 import { Component, HostListener, ViewChild  } from '@angular/core';
 import { SetSimilarity, Couple, JsonResponse} from './types'
-import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartData, ChartEvent, ChartType, Chart } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts'
 import { HttpClient } from '@angular/common/http';
+import zoomPlugin from 'chartjs-plugin-zoom';
+
+Chart.register(zoomPlugin);
 
 @Component({
   selector: 'app-test',
@@ -17,17 +20,20 @@ export class TestComponent {
   public class_names:string[] = [];
   public barChartType = 'bar' as const;
   public scatterChartType: ChartType = 'scatter';
+  public mockScatterData: Couple[] = [];
 
   public chartData_1: ChartData<'scatter'> = {
     labels: [] as string[],
     datasets: [
       {
         label: 'Similarity',
-        data: [] as { x: number, y: number }[],  
-        pointRadius: 5 
+        data: [] as { x: number, y: number, backgroundColor: string }[],  // Add backgroundColor here
+        pointRadius: 5
       }
     ]
   };
+  
+  
 
   public chartData_2: ChartData<'bar'> = {
     labels: this.class_names,
@@ -41,11 +47,26 @@ export class TestComponent {
 
   public chartOptions_1: ChartConfiguration['options'] = {
     responsive: true,
-    maintainAspectRatio: false, 
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: true,
         position: 'top'
+      },
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'xy'
+        },
+        zoom: {
+          wheel: {
+            enabled: true
+          },
+          pinch: {
+            enabled: true
+          },
+          mode: 'xy'
+        }
       }
     },
     scales: {
@@ -53,21 +74,13 @@ export class TestComponent {
         title: {
           display: true,
           text: 'Questions'
-        },
-        afterDataLimits: (scale) => {
-          scale.max = 30;
-          scale.min = 1;
         }
       },
       y: {
         title: {
           display: true,
           text: 'Similarity'
-        },
-        afterDataLimits: (scale) => {
-          scale.max = 1;
-          scale.min = 0;
-      }
+        }
       }
     }
   };
@@ -107,8 +120,9 @@ export class TestComponent {
   @ViewChild('barChart') barChart: BaseChartDirective | undefined;
 
   constructor(private http: HttpClient) {}
+  
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     this.http.get<JsonResponse>('http://127.0.0.1:5000/test')
       .subscribe({
         next: (response) => {
@@ -126,8 +140,59 @@ export class TestComponent {
           }
         }
       });
-  }
+  }*/ 
 
+    ngOnInit(): void {
+        this.generateMockData();
+      }
+
+      generateMockData(): void {
+        this.average = Math.random();
+        this.deviation = Math.random() * 0.5;
+      
+        const mockScatterData: Couple[] = Array.from({ length: 30 }, (_, index) => ({
+          question: `Question ${index + 1}`,
+          trueAnswer: `Answer ${index + 1}`,
+          generatedAnswer: `Generated ${index + 1}`,
+          similarity: Math.random()
+        }));
+      
+        const mockSetSimilarity: SetSimilarity[] = Array.from({ length: 5 }, (_, index) => {
+          const lower = index * 0.2;
+          const upper = lower + 0.2;
+          return {
+            lower_bound: lower, 
+            upper_bound: upper,  
+            elements_in_class: Math.floor(Math.random() * 20)
+          };
+        });
+      
+        this.class_names = mockSetSimilarity.map(item => `${item.lower_bound} - ${item.upper_bound}`);
+      
+        this.chartData_1.datasets[0].data = mockScatterData.map((item, index) => ({ x: index + 1, y: item.similarity }));
+        
+        this.chartData_2.labels = this.class_names;
+        this.chartData_2.datasets[0].data = mockSetSimilarity.map(item => item.elements_in_class);
+      
+        this.loading = false;
+      
+        this.scatterChart?.chart?.update();
+        this.barChart?.chart?.update();
+      }
+      
+      chartClicked(event: { event?: ChartEvent, active?: any[] }): void {
+        if (event.active && event.active.length > 0) {
+          const chartElement = event.active[0];
+          const datasetIndex = chartElement.datasetIndex;
+          const index = chartElement.index;
+          const datasetLabel = this.chartData_1.datasets[datasetIndex].label;
+          const dataValue = this.chartData_1.datasets[datasetIndex].data[index];
+          
+          alert(`Dataset: ${datasetLabel}\nIndex: ${index}\nValue: ${JSON.stringify(dataValue)}`);
+        }
+      }
+      
+      
   updateChartsData(json:JsonResponse): void {
     this.average = json.average;
     this.deviation = json.deviation;
