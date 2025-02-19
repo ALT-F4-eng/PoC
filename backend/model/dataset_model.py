@@ -39,3 +39,9 @@ class Dataset_model:
         data[id][list(data[id].keys())[1]] = new_answer
         self.write_json(data)
         return {'status': True, 'message':'ok'}
+    
+    def save_item(self, new_question: str, new_answer: str) -> dict[str, bool, str, str]:
+        data = self.load_json()
+        data.append({'domanda':new_question, 'rispostaAttesa':new_answer})
+        self.write_json(data)
+        return {'status': True, 'message':'ok'}

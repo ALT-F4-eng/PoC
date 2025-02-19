@@ -37,6 +37,9 @@ class Controller:
     def modify_item(self, id:int, new_question:str, new_answer:str) -> dict[str, bool, str, str]:
         return self.dataset.modify_item(id, new_question, new_answer)
     
+    def save_item(self, new_question:str, new_answer:str) -> dict[str, bool, str, str]:
+        return self.dataset.save_item(new_question, new_answer)
+    
     def get_average(self, values:list[float]) -> float: 
         return self.stats.average(values)
 
