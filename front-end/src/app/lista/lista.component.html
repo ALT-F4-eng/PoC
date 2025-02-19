@@ -1,0 +1,21 @@
+<app-form (qaSubmitted)="addQA($event)"></app-form>
+
+<hr />
+<div *ngFor="let qa of paginatedQaList; let i = index">
+  <div class="qa-item">
+    <p><strong>Domanda:</strong> {{ qa.domanda }}</p>
+    <p><strong>Risposta attesa:</strong> {{ qa.rispostaAttesa }}</p>
+    <button nz-button nzType="primary" [nzSize]="size" nzShape="round" (click)="editQA(i)">Modifica</button>
+    <button nz-button nzType="default" nzDanger [nzSize]="size" nzShape="round" (click)="deleteQA(i)">Elimina</button>
+  </div>
+  <hr />
+</div>
+
+<nz-pagination
+  [nzPageSize]="pageSize"
+  [nzTotal]="qaList.length"
+  [(nzPageIndex)]="currentPage"
+  (nzPageIndexChange)="onPageChange($event)"
+  nzShowQuickJumper>
+</nz-pagination>
+
