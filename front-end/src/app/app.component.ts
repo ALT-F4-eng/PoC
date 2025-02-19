@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   template: `
     <h1>Welcome to {{title}}!</h1>
-
-    
   `,
   styles: [],
 })
