@@ -71,6 +71,7 @@ export class TestComponent {
     },
     scales: {
       x: {
+        type:'linear',
         title: {
           display: true,
           text: 'Questions'
@@ -122,7 +123,7 @@ export class TestComponent {
   constructor(private http: HttpClient) {}
   
 
-  /*ngOnInit(): void {
+  ngOnInit(): void {
     this.http.get<JsonResponse>('http://127.0.0.1:5000/test')
       .subscribe({
         next: (response) => {
@@ -133,75 +134,70 @@ export class TestComponent {
         },
         complete: () => {
           if (this.scatterChart) {
-            this.scatterChart.chart?.update();
+            this.scatterChart?.chart?.update();
           }
           if (this.barChart) {
-            this.barChart.chart?.update();
+            this.barChart?.chart?.update();
           }
         }
       });
-  }*/ 
+  }
 
-    ngOnInit(): void {
-        this.generateMockData();
-      }
+  
+  chartClicked(event: { event?: ChartEvent, active?: any[] }): void {
+    if (event.active && event.active.length > 0) {
+      const chartElement = event.active[0];
+      const datasetIndex = chartElement.datasetIndex;
+      const index = chartElement.index;
+      const datasetLabel = this.chartData_1.datasets[datasetIndex].label;
+      const dataValue = this.chartData_1.datasets[datasetIndex].data[index];
+      
+      alert(`Dataset: ${datasetLabel}\nIndex: ${index}\nValue: ${JSON.stringify(dataValue)}`);
+    }
+  }
 
-      generateMockData(): void {
-        this.average = Math.random();
-        this.deviation = Math.random() * 0.5;
-      
-        const mockScatterData: Couple[] = Array.from({ length: 30 }, (_, index) => ({
-          question: `Question ${index + 1}`,
-          trueAnswer: `Answer ${index + 1}`,
-          generatedAnswer: `Generated ${index + 1}`,
-          similarity: Math.random()
-        }));
-      
-        const mockSetSimilarity: SetSimilarity[] = Array.from({ length: 5 }, (_, index) => {
-          const lower = index * 0.2;
-          const upper = lower + 0.2;
-          return {
-            lower_bound: lower, 
-            upper_bound: upper,  
-            elements_in_class: Math.floor(Math.random() * 20)
-          };
-        });
-      
-        this.class_names = mockSetSimilarity.map(item => `${item.lower_bound} - ${item.upper_bound}`);
-      
-        this.chartData_1.datasets[0].data = mockScatterData.map((item, index) => ({ x: index + 1, y: item.similarity }));
-        
-        this.chartData_2.labels = this.class_names;
-        this.chartData_2.datasets[0].data = mockSetSimilarity.map(item => item.elements_in_class);
-      
-        this.loading = false;
-      
-        this.scatterChart?.chart?.update();
-        this.barChart?.chart?.update();
-      }
-      
-      chartClicked(event: { event?: ChartEvent, active?: any[] }): void {
-        if (event.active && event.active.length > 0) {
-          const chartElement = event.active[0];
-          const datasetIndex = chartElement.datasetIndex;
-          const index = chartElement.index;
-          const datasetLabel = this.chartData_1.datasets[datasetIndex].label;
-          const dataValue = this.chartData_1.datasets[datasetIndex].data[index];
-          
-          alert(`Dataset: ${datasetLabel}\nIndex: ${index}\nValue: ${JSON.stringify(dataValue)}`);
-        }
-      }
-      
-      
-  updateChartsData(json:JsonResponse): void {
+  updateChartsData(json: JsonResponse): void {
     this.average = json.average;
     this.deviation = json.deviation;
-    const sets_similarity:SetSimilarity[] = json.sets_similarity;
-    const jsonData:Couple[] = json.couples;
-    this.class_names = sets_similarity.map((item) => (`${item.lower_bound} - ${item.upper_bound}`));
-    this.chartData_2.labels = this.class_names;
-    this.chartData_1.datasets[0].data = jsonData.map((item, index) => ({x:index+1, y:item.similarity}));
-    this.chartData_2.datasets[0].data = sets_similarity.map((item) => item.elements_in_class);
+  
+    const newScatterData = json.couples.map((item, index) => ({ x: index + 1, y: item.similarity }));
+    const newHistogramData = json.sets_similarity.map((item) => item.elements_in_class);
+    const class_names = json.sets_similarity.map((item) => (`${item.lower_bound} - ${item.upper_bound}`));
+  
+    const destroyChart = (chart: BaseChartDirective | undefined) => {
+      if (chart?.chart) {
+        chart.chart.destroy();
+        (chart as any).chart = null;
+      }
+    };
+    destroyChart(this.scatterChart);
+    destroyChart(this.barChart);
+  
+    this.chartData_1 = {
+      datasets: [{
+        ...this.chartData_1.datasets[0],
+        data: newScatterData,
+        label: 'Similarity',
+        pointRadius: 5
+      }],
+      labels: []
+    };
+
+  
+    this.chartData_2 = {
+      labels: class_names,
+      datasets: [{
+        ...this.chartData_2.datasets[0],
+        data: newHistogramData,
+        label: 'Similarity'
+      }]
+    };
+  
     this.loading = false;
+  
+    setTimeout(() => {
+      this.scatterChart?.chart?.render();
+      this.barChart?.chart?.render();
+    });
   }
 }

@@ -67,6 +67,6 @@ class Text_Similarity_model:
             numbers_math_characters:int = self.count_math(sentence)
             model_name:str = self.choose_model(true_answers[i], numbers_math_characters)
             similarity = self.text_similarity(true_answers[i], generated_answers[i], model_name)
-            results.append({'domanda':questions[i], 'risposta attesa':true_answers[i], 'risposta generata':generated_answers[i], 'similarità':round(similarity, 2)})
+            results.append({'question':questions[i], 'trueAnswer':true_answers[i], 'generatedAnswer':generated_answers[i], 'similarity':round(similarity, 2)})
         
         return results

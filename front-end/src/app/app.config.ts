@@ -12,5 +12,5 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 registerLocaleData(en);
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }),provideRouter(routes), provideClientHydration(withEventReplay()), provideCharts(withDefaultRegisterables()), provideCharts(withDefaultRegisterables()), importProvidersFrom(FormsModule), provideAnimationsAsync(), provideHttpClient()]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }),provideRouter(routes), provideClientHydration(withEventReplay()), provideCharts(withDefaultRegisterables()), provideCharts(withDefaultRegisterables()), importProvidersFrom(FormsModule), provideAnimationsAsync(), provideHttpClient(), provideCharts(withDefaultRegisterables())]
 };

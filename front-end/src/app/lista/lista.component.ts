@@ -74,7 +74,7 @@ export class ListaComponent {
   }
 
   loadJsonData() {
-    this.http.get<any[]>('/dataset.json')
+    this.http.get<any[]>('http://127.0.0.1:5000/dataset/load')
       .pipe(
         catchError(error => {
           //console.error('Error loading JSON:', error);

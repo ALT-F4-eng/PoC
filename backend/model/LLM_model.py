@@ -20,7 +20,8 @@ class LLM_model:
         
         while index<len(questions):
             sub_questions_set:list[str] = questions[index:(len(questions)//subdivisions)+index]
-            question:str = f"rispondi alle seguente domande in italiano in formato python list [str, str, ..]: {"\n".join(sub_questions_set)}"
+            joined_questions:str = "\n".join(sub_questions_set)
+            question:str = f"rispondi alle seguente domande in italiano in formato python list [str, str, ..]: {joined_questions}"
             response = client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[{"role": "user", "content": question}],
