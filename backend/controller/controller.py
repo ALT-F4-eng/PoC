@@ -22,3 +22,14 @@ class Controller:
     
     def categorize(self, questions:list[str], true_answers:list[str], generated_answers:list[str]) -> list[dict]:
         return self.similarity.categorize(questions, true_answers, generated_answers)
+    def save(self, data) -> dict[str, bool, str, str]:
+        return self.dataset.write_json(data)
+
+    def delete(self) -> dict[str, bool, str, str]:
+        return self.dataset.delete_json()
+    
+    def pop_item(self, id:int) -> dict[str, bool, str, str]:
+        return self.dataset.pop_item(id)
+    
+    def modify_item(self, id:int, new_question:str, new_answer:str) -> dict[str, bool, str, str]:
+        return self.dataset.modify_item(id, new_question, new_answer)
