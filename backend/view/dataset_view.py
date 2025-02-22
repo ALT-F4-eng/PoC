@@ -12,7 +12,7 @@ class Dataset_view:
         app.add_url_rule('/dataset/pop_item', 'dataset_popping', Dataset_view.pop_item, methods=['GET'])#elimina
         app.add_url_rule('/dataset/modify_item', 'dataset_modifying', Dataset_view.modify_item, methods=['POST'])#modifica
         app.add_url_rule('/dataset/save_item', 'dataset_saving', Dataset_view.save_item, methods=['POST'])#aggiungi
-        app.add_url_rule('/dataset/save', 'dataset_saving', Dataset_view.post, methods=['POST'])
+        app.add_url_rule('/dataset/save', 'dataset_saving_post', Dataset_view.post, methods=['POST'])
         app.add_url_rule('/dataset/delete', 'dataset_deleting', Dataset_view.delete, methods=['DELETE'])
 
     @staticmethod

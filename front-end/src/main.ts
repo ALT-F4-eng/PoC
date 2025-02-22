@@ -8,6 +8,10 @@ bootstrapApplication(AppComponent, appConfig).catch((err) =>
   console.error(err)
 );
 
+bootstrapApplication(FormComponent, appConfig).catch((err) =>
+  console.error(err)
+);
+
 bootstrapApplication(ListaComponent, appConfig).catch((err) =>
   console.error(err)
 );
