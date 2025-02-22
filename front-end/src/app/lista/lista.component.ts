@@ -41,34 +41,52 @@ export class ListaComponent {
   }
 
   editQA(index: number) {
-    const updatedQuestion = prompt(
-      "Modifica la domanda:",
-      this.qaList[index].domanda
-    );
-    const updatedAnswer = prompt(
-      "Modifica la risposta attesa:",
-      this.qaList[index].rispostaAttesa
-    );
-
+    const globalIndex = (this.currentPage - 1) * this.pageSize + index;
+    const updatedQuestion = prompt("Modifica la domanda:", this.qaList[globalIndex].domanda);
+    const updatedAnswer = prompt("Modifica la risposta attesa:", this.qaList[globalIndex].rispostaAttesa);
+  
     if (updatedQuestion && updatedAnswer) {
-      this.qaList[index] = {
-        domanda: updatedQuestion,
-        rispostaAttesa: updatedAnswer,
+      const updatedData = {
+        id: globalIndex, // ID della coppia da modificare
+        new_question: updatedQuestion,
+        new_answer: updatedAnswer
       };
-      this.updatePaginatedList();
+  
+      this.http.post('http://127.0.0.1:5000/list/modify_item', updatedData).subscribe({
+        next: (response) => {
+          console.log('Domanda modificata con successo:', response);
+          this.qaList[globalIndex] = {
+            domanda: updatedQuestion,
+            rispostaAttesa: updatedAnswer
+          };
+          this.updatePaginatedList();
+        },
+        error: (error) => {
+          console.error('Errore nella modifica:', error);
+        }
+      });
     }
   }
 
   deleteQA(pageIndex: number) {
     const globalIndex = (this.currentPage - 1) * this.pageSize + pageIndex;
+  
     this.modal.confirm({
-      nzTitle: 'Sei sicuro di cancellare la domanda e la risposta',
-      nzOkText: 'Yes',
+      nzTitle: 'Sei sicuro di cancellare la domanda e la risposta?',
+      nzOkText: 'Sì',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
-        this.qaList.splice(globalIndex, 1);
-        this.updatePaginatedList();
+        this.http.get(`http://127.0.0.1:5000/list/delete_item?id=${globalIndex}`).subscribe({
+          next: (response) => {
+            console.log('Domanda eliminata con successo:', response);
+            this.qaList.splice(globalIndex, 1);
+            this.updatePaginatedList();
+          },
+          error: (error) => {
+            console.error('Errore nella cancellazione:', error);
+          }
+        });
       }
     });
   }

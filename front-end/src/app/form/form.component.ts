@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -20,16 +21,26 @@ export class FormComponent{
     risposta: new FormControl(''),
   });
   
+  constructor(private http: HttpClient) {}  
 
   //qui c'è la domanda e la risposta del form
   submitForm(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
-      this.qaSubmitted.emit({
+      const formData = {
         domanda: this.form.value.domanda ?? '',
         risposta: this.form.value.risposta ?? ''
+      };
+
+      this.http.post('http://localhost:5000/form/save', formData).subscribe({
+        next: (response) => {
+          console.log('Dati salvati con successo:', response);
+          this.qaSubmitted.emit(formData);
+          this.form.reset();
+        },
+        error: (error) => {
+          console.error('Errore nell’invio:', error);
+        }
       });
-      this.form.reset();
     }
   }
 }

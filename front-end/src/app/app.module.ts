@@ -17,9 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
       BrowserModule,
       BrowserAnimationsModule,  
       NzFormModule,
-      ReactiveFormsModule       
+      ReactiveFormsModule,
     ],
-    providers: [],
-    bootstrap: [FormComponent, ListaComponent]
+    
+    bootstrap: [FormComponent, ListaComponent, AppComponent]
   })
   export class AppModule { }
