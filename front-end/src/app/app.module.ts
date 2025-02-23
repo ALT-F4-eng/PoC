@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { FormComponent } from './form/form.component';
 import { ListaComponent } from './lista/lista.component';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
       HomeComponent,
       FormComponent,
       ListaComponent,
-      HeaderComponent
+      HeaderComponent,
+      FooterComponent
     ],
     imports: [
       BrowserModule,

@@ -161,7 +161,7 @@ export class TestComponent {
       { path: '/form', label: 'Vai alla pagina del form' },
       { path: '/list', label: 'Vai alla pagina della lista' },
     ];
-    const pageName = "Form";
+    const pageName = "Test";
     this.navigationService.updateNavLinks(links, pageName);
   }
 
