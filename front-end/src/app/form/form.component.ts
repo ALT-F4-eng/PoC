@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
+import { NavigationService, NavLink } from '../navigation/navigation.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+
 
 @Component({
   selector: 'app-form',
@@ -13,7 +14,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   styleUrl: './form.component.css'
 })
 export class FormComponent{
- 
+
   @Output() qaSubmitted = new EventEmitter<{ domanda: string; risposta: string }>();
 
   form = new FormGroup({
@@ -21,9 +22,23 @@ export class FormComponent{
     risposta: new FormControl(''),
   });
   
-  constructor(private http: HttpClient) {}  
+  constructor(private http: HttpClient, private navigationService: NavigationService) {}  
 
-  //qui c'è la domanda e la risposta del form
+  ngOnInit() {
+    this.setHeader();
+  }
+
+  setHeader(): void{
+    const links:NavLink[] = [
+      { path: '/', label: 'Vai alla pagina del home' },
+      { path: '/list', label: 'Vai alla pagina della lista' },
+      { path: '/test', label: 'Vai alla pagina del test' },
+    ];
+    const pageName = "Form";
+    this.navigationService.updateNavLinks(links, pageName);
+  }
+
+
   submitForm(): void {
     if (this.form.valid) {
       const formData = {

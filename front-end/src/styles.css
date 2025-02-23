@@ -1,1 +1,433 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    --color-background: rgb(255, 255, 255);
+    --color-shadow: rgba(0, 0, 0, 0.05);
+    --color-text-primary: #2d3436;
+    --color-border: #e0e0e0;
+    --color-border-hover: #b2b2b2;
+    --color-border-focus: #6366f1;
+    --color-focus-shadow: rgba(99, 102, 241, 0.2);
+    --color-text-secondary: #64748b;
+    --color-gradient-start: #6e8efb;
+    --color-gradient-end: #a777e3;
+    --color-button-text: #fff;
+}
+
+.custom-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    margin-top: 100px;
+  }
+  
+  .item-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--color-background);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .form-item {
+    display: flex;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .form-label {
+    flex: 0 0 16%;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    padding-top: 0.5rem;
+  }
+  
+  .form-control {
+    flex: 1;
+  }
+  
+  .textarea-container {
+    position: relative;
+  }
+  
+  .form-textarea {
+    width: 100%;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    resize: vertical;
+    font-family: inherit;
+  }
+  
+  .form-textarea:hover {
+    border-color: #b2b2b2;
+  }
+  
+  .form-textarea:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    outline: none;
+  }
+  
+  .char-counter {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    background-color: var(--color-background);
+    padding-left: 4px;
+  }
+  
+
+  .submit-button {
+    background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+    border: none;
+    color: #fff;
+    margin-top: 20px;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.submit-button:hover {
+    background: linear-gradient(135deg, var(--color-gradient-end), var(--color-gradient-start));
+    transform: scale(1.05);
+}
+  
+  @media (max-width: 768px) {
+    .item-container {
+      padding: 1rem;
+      width: 95%;
+    }
+  
+    .form-item {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .form-label {
+      width: 100%;
+      flex: none;
+    }
+  }
+/************************************************************************************/
+
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Sfondo bianco semi-trasparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Assicura che lo spinner sia sopra gli altri elementi */
+  }
+  
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc; /* Colore grigio chiaro per lo sfondo dello spinner */
+    border-top: 5px solid #333; /* Colore più scuro per la parte superiore */
+    border-radius: 50%; /* Rende lo spinner circolare */
+    animation: spin 1s linear infinite; /* Animazione di rotazione */
+  }
+  
+  /* Animazione di rotazione */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Stile per sfocare il contenuto quando loading è true */
+  .content-blur {
+    filter: blur(2px);
+    pointer-events: none; /* Disabilita interazioni durante il caricamento */
+  }
+  
+  .main-container {
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Stile per la lista delle statistiche */
+  .stats-list {
+    list-style-type: none; /* Rimuove i bullet point */
+    padding: 0;
+    margin: 20px 0; /* Spaziatura superiore e inferiore */
+    text-align: center; /* Centra il testo */
+  }
+  
+  .stats-list li {
+    display: inline-block; /* Dispone gli elementi in linea */
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: #fff; /* Colore del testo bianco */
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Aggiunge un'ombra */
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .stats-list li:hover {
+    transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
+  }
+  
+  /* Contenitore dei grafici */
+  
+  .chart-container {
+    margin: 40px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    height: 800px;
+  }
+  
+  
+  .table-container {
+    overflow-x: auto;
+    margin: 20px auto;
+    width: 80%;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Pulsanti */
+  .qa-item button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .qa-item button:first-child {
+    background: #6e8efb;
+    color: white;
+  }
+  
+  .qa-item button:first-child:hover {
+    background: #5a7de0;
+  }
+  
+  .qa-item button:last-child {
+    background: #f44336;
+    color: white;
+  }
+  
+  .qa-item button:last-child:hover {
+    background: #d32f2f;
+  }
+  
+  /* Media query per dispositivi mobili */
+  @media (max-width: 768px) {
+    .chart-container {
+        padding: 10px;
+    }
+  
+    th, td {
+        padding: 8px;
+    }
+  
+    .qa-item button {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+  }
+  /*************************************************************************************************/
+  .header-container {
+    text-align: center;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    padding: 40px 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-container h1 {
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.header-container nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.header-container a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.header-container a:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+/***********************************************************************************/
+
+/* Overlay di caricamento */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Sfondo bianco semi-trasparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Assicura che lo spinner sia sopra gli altri elementi */
+  }
+  
+  /* Spinner di caricamento */
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc; /* Colore grigio chiaro per lo sfondo dello spinner */
+    border-top: 5px solid #333; /* Colore più scuro per la parte superiore */
+    border-radius: 50%; /* Rende lo spinner circolare */
+    animation: spin 1s linear infinite; /* Animazione di rotazione */
+  }
+  
+  /* Animazione di rotazione */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Stile per sfocare il contenuto quando loading è true */
+  .content-blur {
+    filter: blur(2px);
+    pointer-events: none; /* Disabilita interazioni durante il caricamento */
+  }
+  
+  
+  /* Stile per ogni elemento QA */
+  .qa-item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .qa-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  }
+  
+  .qa-item p {
+    margin: 10px 0;
+    color: #333;
+  }
+  
+  /* Stile per la linea orizzontale (hr) */
+  hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    margin: 30px auto;
+    max-width: 800px;
+  }
+  
+  /* Stile per la paginazione (personalizzabile in base alle classi fornite da ng-zorro) */
+  nz-pagination {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  
+  .qa-item button {
+    margin-right: 10px; /* Aggiunge uno spazio a destra di ogni pulsante */
+  }
+  
+  /* Rimuove il margine a destra dall'ultimo pulsante per evitare spaziature extra */
+  .qa-item button:last-child {
+    margin-right: 0;
+  }
+  
+  .deleteButton {
+    background: linear-gradient(135deg, #ff4d4f, #ff6f6f); /* Colori di gradiente per il pulsante di eliminazione */
+    border: none;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  .deleteButton:hover {
+    background: linear-gradient(135deg, #ff6f6f, #ff4d4f); /* Inverti il gradiente al passaggio del mouse */
+    transform: scale(1.05);
+  }
+  
+  /* Stile per il pulsante di modifica */
+  .modifyButton {
+    background: linear-gradient(135deg, #a777e3, #6e8efb); /* Colori di gradiente per il pulsante di modifica */
+    border: none;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  .modifyButton:hover {
+    background: linear-gradient(135deg, #6e8efb, #a777e3); /* Inverti il gradiente al passaggio del mouse */
+    transform: scale(1.05);
+  }
+/*********************************************************************************************/

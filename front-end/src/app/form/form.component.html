@@ -1,38 +1,39 @@
-<div style="text-align: center;">
-  <h1>Benvenuto nella pagina di Form!</h1>
-  <a href="/">Vai alla pagina Home</a>
-</div>
-<form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
+<form class="custom-form" [formGroup]="form" (ngSubmit)="submitForm()">
+  <div class="item-container">
+    <div class="form-item">
+      <label class="form-label">Domanda</label>
+      <div class="form-control">
+        <div class="textarea-container">
+          <textarea 
+            formControlName="domanda" 
+            class="form-textarea" 
+            rows="4" 
+            placeholder="Inserisci la domanda"
+            maxlength="2000"
+          ></textarea>
+          <span class="char-counter">0/2000</span>
+        </div>
+      </div>
+    </div>
 
+    <div class="form-item">
+      <label class="form-label">Risposta</label>
+      <div class="form-control">
+        <div class="textarea-container">
+          <textarea 
+            formControlName="risposta" 
+            class="form-textarea" 
+            rows="4" 
+            placeholder="Inserisci la risposta"
+            maxlength="2000"
+          ></textarea>
+          <span class="char-counter">0/2000</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <nz-form-item>
-    <nz-form-label [nzSpan]="2">domanda</nz-form-label>
-    <nz-form-control [nzSpan]="5" nzErrorTip="Perfavore inserisci una domanda">
-      <nz-textarea-count [nzMaxCharacterCount]="2000">
-        <textarea formControlName="domanda" nz-input rows="2" placeholder="Inserisci la domanda"></textarea>
-      </nz-textarea-count>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label [nzSpan]="2">Risposta</nz-form-label>
-    <nz-form-control [nzSpan]="5" nzErrorTip="Perfavore inserisci una risposta">
-      <nz-textarea-count [nzMaxCharacterCount]="2000">
-        <textarea formControlName="risposta" nz-input rows="2" placeholder="Inserisci la risposta"></textarea>
-      </nz-textarea-count>
-    </nz-form-control>
-  </nz-form-item>
-
-
-  <nz-form-item>
-    <nz-form-control [nzOffset]="2">
-      <button nz-button nzType="primary">Salva</button>
-    </nz-form-control>
-  </nz-form-item>
-
-
+  <div class="form-actions">
+    <button type="submit" class="submit-button">Salva</button>
+  </div>
 </form>
-
-
-
-

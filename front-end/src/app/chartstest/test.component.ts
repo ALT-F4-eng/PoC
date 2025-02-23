@@ -1,15 +1,18 @@
 import { Component, HostListener, ViewChild  } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { SetSimilarity, Couple, JsonResponse} from './types'
+import { NavigationService, NavLink } from '../navigation/navigation.service';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType, Chart } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts'
 import { HttpClient } from '@angular/common/http';
 import zoomPlugin from 'chartjs-plugin-zoom';
 
+
 Chart.register(zoomPlugin);
 
 @Component({
   selector: 'app-test',
-  imports: [BaseChartDirective],
+  imports: [CommonModule,BaseChartDirective],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css'
 })
@@ -21,6 +24,7 @@ export class TestComponent {
   public barChartType = 'bar' as const;
   public scatterChartType: ChartType = 'scatter';
   public mockScatterData: Couple[] = [];
+  public couples: Couple[] = [];
 
   public chartData_1: ChartData<'scatter'> = {
     labels: [] as string[],
@@ -32,8 +36,6 @@ export class TestComponent {
       }
     ]
   };
-  
-  
 
   public chartData_2: ChartData<'bar'> = {
     labels: this.class_names,
@@ -120,19 +122,29 @@ export class TestComponent {
   @ViewChild('scatterChart') scatterChart: BaseChartDirective | undefined;
   @ViewChild('barChart') barChart: BaseChartDirective | undefined;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private navigationService: NavigationService) {}
   
 
   ngOnInit(): void {
+    this.setHeader();
+    this.loading = true;
+    //avvio inizio caricamento
     this.http.get<JsonResponse>('http://127.0.0.1:5000/test')
       .subscribe({
         next: (response) => {
-          this.updateChartsData(response);
+          if (response) {
+            try {
+              this.updateChartsData(response);
+            } catch (err) {
+              alert(err);
+            }
+          }
         },
         error: (err) => {
-          alert(`${err.message}`);
+          alert(`Error: ${err.message}`);
         },
         complete: () => {
+          this.loading = false;
           if (this.scatterChart) {
             this.scatterChart?.chart?.update();
           }
@@ -143,7 +155,16 @@ export class TestComponent {
       });
   }
 
-  
+  setHeader(): void{
+    const links:NavLink[] = [
+      { path: '/', label: 'Vai alla pagina del home' },
+      { path: '/form', label: 'Vai alla pagina del form' },
+      { path: '/list', label: 'Vai alla pagina della lista' },
+    ];
+    const pageName = "Form";
+    this.navigationService.updateNavLinks(links, pageName);
+  }
+
   chartClicked(event: { event?: ChartEvent, active?: any[] }): void {
     if (event.active && event.active.length > 0) {
       const chartElement = event.active[0];
@@ -159,6 +180,7 @@ export class TestComponent {
   updateChartsData(json: JsonResponse): void {
     this.average = json.average;
     this.deviation = json.deviation;
+    this.couples = json.couples;
   
     const newScatterData = json.couples.map((item, index) => ({ x: index + 1, y: item.similarity }));
     const newHistogramData = json.sets_similarity.map((item) => item.elements_in_class);
@@ -193,11 +215,15 @@ export class TestComponent {
       }]
     };
   
-    this.loading = false;
-  
     setTimeout(() => {
       this.scatterChart?.chart?.render();
       this.barChart?.chart?.render();
     });
+  }
+
+  getSimilarityColor(value: number): string {
+    const red = Math.round((1 - value) * 255);
+    const green = Math.round(value * 255);
+    return `rgb(${red}, ${green}, 0)`;
   }
 }

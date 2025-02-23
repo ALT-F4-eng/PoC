@@ -1,31 +1,55 @@
-<div style="text-align: center;">
-    <h1>Benvenuto nella pagina di Test!</h1>
-    <a href="/">Vai alla pagina Home</a>
+<div *ngIf="loading" class="loading-overlay">
+    <div class="spinner"></div>
 </div>
-<div>
-<ul>
-<li>Average: {{ average }}</li>
-<li>Deviation: {{ deviation }}</li>
-</ul>
-</div>
-<div class="chart-container">
+
+<div [class.content-blur]="loading"><!--*ngIf="!loading"-->
+    <div>
+    <ul class="stats-list">
+    <li>Media: {{ average }}</li>
+    <li>Deviazione: {{ deviation }}</li>
+    </ul>
+    </div>
+    <div class="chart-container">
+        <canvas baseChart
+        [data]="chartData_1"
+        [options]="chartOptions_1"
+        [type]="scatterChartType"
+        chatType="scatter"
+        (chartClick)="chartClicked($event)">
+    </canvas>
+    </div>
+
+    <div class="chart-container chart-histo">
     <canvas baseChart
-    [data]="chartData_1"
-    [options]="chartOptions_1"
-    [type]="scatterChartType"
-    chatType="scatter"
-    (chartClick)="chartClicked($event)">
-</canvas>
+        [data]="chartData_2"
+        [options]="chartOptions_2"
+        [type]="barChartType"
+        chartType="bar"
+        (chartClick)="chartClicked($event)">
+    </canvas>
+    </div>
 
+<!-- Tabella con i dati dei couple -->
+    <div class="table-container">
+        <table>
+        <thead>
+            <tr>
+            <th>Domande</th>
+            <th>Risposte vere</th>
+            <th>Risposte Generate</th>
+            <th>Similarità</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let couple of couples">
+            <td>{{ couple.question }}</td>
+            <td>{{ couple.trueAnswer }}</td>
+            <td>{{ couple.generatedAnswer }}</td>
+            <td [ngStyle]="{'background-color': getSimilarityColor(couple.similarity)}">
+                {{ couple.similarity }}
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
 </div>
-<div class="chart-container">
-<canvas baseChart
-    [data]="chartData_2"
-    [options]="chartOptions_2"
-    [type]="barChartType"
-    chartType="bar"
-    (chartClick)="chartClicked($event)">
-</canvas>
-</div>
-
-
