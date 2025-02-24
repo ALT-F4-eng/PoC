@@ -128,13 +128,15 @@ export class TestComponent {
   ngOnInit(): void {
     this.setHeader();
     this.loading = true;
-    //avvio inizio caricamento
     this.http.get<JsonResponse>('http://127.0.0.1:5000/test')
       .subscribe({
         next: (response) => {
           if (response) {
             try {
+              console.log(response);
               this.updateChartsData(response);
+              sessionStorage.setItem('jsonResponse', JSON.stringify(response));
+              ///////salva 
             } catch (err) {
               alert(err);
             }
@@ -171,9 +173,30 @@ export class TestComponent {
       const datasetIndex = chartElement.datasetIndex;
       const index = chartElement.index;
       const datasetLabel = this.chartData_1.datasets[datasetIndex].label;
-      const dataValue = this.chartData_1.datasets[datasetIndex].data[index];
-      
-      alert(`Dataset: ${datasetLabel}\nIndex: ${index}\nValue: ${JSON.stringify(dataValue)}`);
+      const dataValue = this.chartData_1.datasets[datasetIndex].data[index];  
+      const jsonResponseStr  = sessionStorage.getItem('jsonResponse');
+    
+      if (jsonResponseStr) {
+        try {
+          const jsonResponse: JsonResponse = JSON.parse(jsonResponseStr);
+          const couple = jsonResponse.couples[index];
+          if (couple) {
+            alert(
+              `Dataset: ${datasetLabel}\nIndex: ${index}\nValue: ${JSON.stringify(dataValue)}\n\n` +
+              `Domanda: ${couple.question}\nTrue Answer: ${couple.trueAnswer}\nGenerated Answer: ${couple.generatedAnswer}`
+            );
+          } else {
+            alert(
+              `Dataset: ${datasetLabel}\nIndex: ${index}\nValue: ${JSON.stringify(dataValue)}\n\n` +
+              `Nessuna informazione associata trovata per questo indice.`
+            );
+          }
+        } catch (error) {
+          alert(`Errore durante il parsing del JSON salvato in sessione: ${error}`);
+        }
+      } else {
+        alert("Nessun dato JSON trovato in sessione.");
+      }
     }
   }
 
