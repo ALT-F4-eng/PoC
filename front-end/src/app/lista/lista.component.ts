@@ -59,10 +59,9 @@ export class ListaComponent {
     const globalIndex = (this.currentPage - 1) * this.pageSize + index;
     const updatedQuestion = prompt("Modifica la domanda:", this.qaList[globalIndex].domanda);
     const updatedAnswer = prompt("Modifica la risposta attesa:", this.qaList[globalIndex].rispostaAttesa);
-    
-    this.loading = true;
   
-    if (updatedQuestion && updatedAnswer) {
+    if (updatedQuestion && updatedAnswer && (updatedQuestion != this.qaList[globalIndex].domanda || updatedAnswer != this.qaList[globalIndex].rispostaAttesa) ) {
+      this.loading = true;
       const updatedData = {
         id: globalIndex, // ID della coppia da modificare
         new_question: updatedQuestion,

@@ -134,9 +134,8 @@ export class TestComponent {
           if (response) {
             try {
               console.log(response);
-              this.updateChartsData(response);
               sessionStorage.setItem('jsonResponse', JSON.stringify(response));
-              ///////salva 
+              this.updateChartsData(response);
             } catch (err) {
               alert(err);
             }
