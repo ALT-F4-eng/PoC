@@ -24,6 +24,7 @@ export class FormComponent{
   //qui c'è la domanda e la risposta del form
   submitForm(): void {
     if (this.form.valid) {
+      console.log(this.form.value);
       this.qaSubmitted.emit({
         domanda: this.form.value.domanda ?? '',
         risposta: this.form.value.risposta ?? ''
