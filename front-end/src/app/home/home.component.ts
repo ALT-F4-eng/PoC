@@ -7,7 +7,7 @@ import { NavigationService, NavLink } from '../navigation/navigation.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+//
   homeData: any;
   handleError: any;
 

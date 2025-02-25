@@ -27,7 +27,7 @@ export class ListaComponent {
   public loading = true;
   qaList: QA[] = [];
   paginatedQaList: QA[] = [];
-  pageSize: number = 5;
+  pageSize: number = 5;//
   currentPage: number = 1;
 
   size: NzButtonSize = 'large';

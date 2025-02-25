@@ -9,7 +9,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 
 @Component({
   selector: 'app-form',
-  imports: [ReactiveFormsModule, NzButtonModule, NzFormModule, NzInputModule],
+  imports: [ReactiveFormsModule, NzButtonModule, NzFormModule, NzInputModule],//
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
