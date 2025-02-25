@@ -1,0 +1,6 @@
+<div class="header-container">
+  <h1>Benvenuto in {{pageName}}</h1>
+    <nav>
+      <a *ngFor="let link of navLinks" [routerLink]="link.path">{{ link.label }}</a>
+    </nav>
+  </div>  

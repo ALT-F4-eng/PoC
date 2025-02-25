@@ -1,23 +1,35 @@
+import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NzFormModule } from 'ng-zorro-antd/form';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 import { FormComponent } from './form/form.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { NzFormModule } from 'ng-zorro-antd/form';
+import { ListaComponent } from './lista/lista.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 @NgModule({
     declarations: [
       AppComponent,
-      FormComponent
+      HomeComponent,
+      FormComponent,
+      ListaComponent,
+      HeaderComponent,
+      FooterComponent
     ],
     imports: [
       BrowserModule,
       BrowserAnimationsModule,  
       NzFormModule,
-      ReactiveFormsModule       
+      ReactiveFormsModule,
+      RouterModule.forRoot([])
     ],
-    providers: [],
-    bootstrap: [FormComponent]
+    
+    bootstrap: [AppComponent]//FormComponent, ListaComponent, 
   })
   export class AppModule { }

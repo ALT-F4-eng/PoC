@@ -7,7 +7,3 @@ import { FormComponent } from "./app/form/form.component";
 bootstrapApplication(AppComponent, appConfig).catch((err) =>
   console.error(err)
 );
-
-bootstrapApplication(ListaComponent, appConfig).catch((err) =>
-  console.error(err)
-);

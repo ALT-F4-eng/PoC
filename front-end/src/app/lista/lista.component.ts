@@ -6,7 +6,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { FormComponent } from "../form/form.component";
+import { NavigationService, NavLink } from '../navigation/navigation.service';
 
 interface QA {
   domanda: string;
@@ -15,12 +15,13 @@ interface QA {
 
 @Component({
   selector: "app-lista",
-  imports: [CommonModule,NzButtonModule,NzModalModule,NzPaginationModule,FormComponent],
+  imports: [CommonModule,NzButtonModule,NzModalModule,NzPaginationModule],//,FormComponent
   templateUrl: "./lista.component.html",
   styleUrl: "./lista.component.css",
 })
 
 export class ListaComponent {
+  public loading = true;
   qaList: QA[] = [];
   paginatedQaList: QA[] = []; // Elementi della pagina corrente
   pageSize: number = 5; // Numero di elementi per pagina
@@ -28,8 +29,22 @@ export class ListaComponent {
 
   size: NzButtonSize = 'large';
 
-  constructor(private http: HttpClient,private modal: NzModalService) {
-   this.loadJsonData();
+  constructor(private http: HttpClient,private modal: NzModalService, private navigationService: NavigationService) {
+  }
+
+  ngOnInit() {
+    this.setHeader();
+    this.loadJsonData();
+  }
+
+  setHeader(): void{
+    const links:NavLink[] = [
+      { path: '/', label: 'Vai alla pagina del home' },
+      { path: '/form', label: 'Vai alla pagina del form' },
+      { path: '/test', label: 'Vai alla pagina del test' },
+    ];
+    const pageName = "Lista";
+    this.navigationService.updateNavLinks(links, pageName);
   }
 
   addQA(newQA: { domanda: string; risposta: string }) {
@@ -41,51 +56,87 @@ export class ListaComponent {
   }
 
   editQA(index: number) {
-    const updatedQuestion = prompt(
-      "Modifica la domanda:",
-      this.qaList[index].domanda
-    );
-    const updatedAnswer = prompt(
-      "Modifica la risposta attesa:",
-      this.qaList[index].rispostaAttesa
-    );
-
-    if (updatedQuestion && updatedAnswer) {
-      this.qaList[index] = {
-        domanda: updatedQuestion,
-        rispostaAttesa: updatedAnswer,
+    const globalIndex = (this.currentPage - 1) * this.pageSize + index;
+    const updatedQuestion = prompt("Modifica la domanda:", this.qaList[globalIndex].domanda);
+    const updatedAnswer = prompt("Modifica la risposta attesa:", this.qaList[globalIndex].rispostaAttesa);
+  
+    if (updatedQuestion && updatedAnswer && (updatedQuestion != this.qaList[globalIndex].domanda || updatedAnswer != this.qaList[globalIndex].rispostaAttesa) ) {
+      this.loading = true;
+      const updatedData = {
+        id: globalIndex, // ID della coppia da modificare
+        new_question: updatedQuestion,
+        new_answer: updatedAnswer
       };
-      this.updatePaginatedList();
+  
+      this.http.post('http://127.0.0.1:5000/list/modify_item', updatedData).subscribe({
+        next: (response) => {
+          console.log('Domanda modificata con successo:', response);
+          this.qaList[globalIndex] = {
+            domanda: updatedQuestion,
+            rispostaAttesa: updatedAnswer
+          };
+          this.updatePaginatedList();
+        },
+        error: (error) => {
+          console.error('Error on modify:', error);
+        },
+        complete:() => {
+          this.loading = false;
+        }
+      });
     }
   }
 
   deleteQA(pageIndex: number) {
     const globalIndex = (this.currentPage - 1) * this.pageSize + pageIndex;
+
+
     this.modal.confirm({
-      nzTitle: 'Sei sicuro di cancellare la domanda e la risposta',
-      nzOkText: 'Yes',
+      nzTitle: 'Sei sicuro di cancellare la domanda e la risposta?',
+      nzOkText: 'Sì',
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
-        this.qaList.splice(globalIndex, 1);
-        this.updatePaginatedList();
+        this.loading = true;
+        this.http.get(`http://127.0.0.1:5000/list/delete_item?id=${globalIndex}`).subscribe({
+          next: (response) => {
+            console.log('Domanda eliminata con successo:', response);
+            this.qaList.splice(globalIndex, 1);
+            this.updatePaginatedList();
+          },
+          error: (error) => {
+            console.error('Error on deleting.:', error);
+          },
+          complete:() => {
+            this.loading = false;
+          }
+        });
       }
     });
   }
 
   loadJsonData() {
-    this.http.get<any[]>('/dataset.json')
+    this.loading = true;
+    this.http.get<any[]>('http://127.0.0.1:5000/dataset/load')
       .pipe(
         catchError(error => {
           //console.error('Error loading JSON:', error);
           return of([]); 
         })
       )
-      .subscribe(data => {
+      .subscribe({
+        next:(data) => {
         this.qaList = data;
         //console.log('Loaded QA List da load json:', this.qaList);
         this.updatePaginatedList();
-      });
+      },
+      error: (error) => {
+        console.error('Error on loading dataset:', error);
+      },
+      complete:() => {
+        this.loading = false;
+      }
+    });
   }
   updatePaginatedList() {
     //console.log('Loaded currentPage:', this.currentPage);
