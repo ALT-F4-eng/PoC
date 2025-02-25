@@ -159,7 +159,6 @@ export class TestComponent {
   setHeader(): void{
     const links:NavLink[] = [
       { path: '/', label: 'Vai alla pagina del home' },
-      { path: '/form', label: 'Vai alla pagina del form' },
       { path: '/list', label: 'Vai alla pagina della lista' },
     ];
     const pageName = "Test";

@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
   setHeader(): void{
     const links:NavLink[] = [
       { path: '/test', label: 'Vai alla pagina del test' },
-      { path: '/form', label: 'Vai alla pagina del form' },
       { path: '/list', label: 'Vai alla pagina della lista' },
     ];
     const pageName = "Home";
