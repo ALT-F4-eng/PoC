@@ -9,35 +9,23 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 
 @Component({
   selector: 'app-form',
-  imports: [ReactiveFormsModule, NzButtonModule, NzFormModule, NzInputModule],
+  imports: [ReactiveFormsModule, NzButtonModule, NzFormModule, NzInputModule],//
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
 export class FormComponent{
 
   @Output() qaSubmitted = new EventEmitter<{ domanda: string; risposta: string }>();
+  @Output() loadingChange = new EventEmitter<boolean>();
 
   form = new FormGroup({
     domanda: new FormControl(''),
     risposta: new FormControl(''),
   });
+
+  loading = false;
   
   constructor(private http: HttpClient, private navigationService: NavigationService) {}  
-
-  ngOnInit() {
-    this.setHeader();
-  }
-
-  setHeader(): void{
-    const links:NavLink[] = [
-      { path: '/', label: 'Vai alla pagina del home' },
-      { path: '/list', label: 'Vai alla pagina della lista' },
-      { path: '/test', label: 'Vai alla pagina del test' },
-    ];
-    const pageName = "Form";
-    this.navigationService.updateNavLinks(links, pageName);
-  }
-
 
   submitForm(): void {
     if (this.form.valid) {
@@ -45,7 +33,7 @@ export class FormComponent{
         domanda: this.form.value.domanda ?? '',
         risposta: this.form.value.risposta ?? ''
       };
-
+      this.loadingChange.emit(true);
       this.http.post('http://localhost:5000/form/save', formData).subscribe({
         next: (response) => {
           console.log('Dati salvati con successo:', response);
@@ -54,6 +42,9 @@ export class FormComponent{
         },
         error: (error) => {
           console.error('Errore nell’invio:', error);
+        },
+        complete: () => {
+          this.loadingChange.emit(false);
         }
       });
     }

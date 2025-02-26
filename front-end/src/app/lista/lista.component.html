@@ -1,8 +1,8 @@
 <div class="main-content">
   <div class="form-section">
     <h2>Dataset</h2>
-    <p>nella seguente pagina sono riportate tutte le domande e le relative risposte presenti nel dataset.</p>
-    <p>qui hai la possibilità di modificare o addirittura eliminare elementi di tuo interesse.</p>
+    <p>Nella seguente pagina sono riportate tutte le domande e le relative risposte presenti nel dataset.</p>
+    <p>Qui hai la possibilità di aggiungere, modificare ed eliminare elementi di tuo interesse.</p>
   </div>
 
 <div *ngIf="loading" class="loading-overlay">
@@ -10,8 +10,8 @@
 </div>
 
 <div [class.content-blur]="loading">
-
-  <hr />
+  <app-form (qaSubmitted)="onQaSubmitted($event)" (loadingChange)="setLoading($event)"></app-form>
+  <hr/>
   <div *ngFor="let qa of paginatedQaList; let i = index">
     <div class="qa-item">
       <p><strong>Domanda:</strong> {{ qa.domanda }}</p>
@@ -20,7 +20,7 @@
       <button class="deleteButton" (click)="deleteQA(i)">Elimina</button>
     </div>
     <hr />
-  </div>
+  </div><!---->
   
   <nz-pagination
     [nzPageSize]="pageSize"

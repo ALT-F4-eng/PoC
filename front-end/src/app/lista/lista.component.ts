@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
+import { FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
 import { NzButtonModule, NzButtonSize } from 'ng-zorro-antd/button';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
@@ -7,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { NavigationService, NavLink } from '../navigation/navigation.service';
+import { FormComponent } from '../form/form.component';
 
 interface QA {
   domanda: string;
@@ -15,17 +17,18 @@ interface QA {
 
 @Component({
   selector: "app-lista",
-  imports: [CommonModule,NzButtonModule,NzModalModule,NzPaginationModule],//,FormComponent
+  imports: [CommonModule,FormComponent,ReactiveFormsModule,NzButtonModule,NzModalModule,NzPaginationModule],//,FormComponent
   templateUrl: "./lista.component.html",
   styleUrl: "./lista.component.css",
 })
 
 export class ListaComponent {
+
   public loading = true;
   qaList: QA[] = [];
-  paginatedQaList: QA[] = []; // Elementi della pagina corrente
-  pageSize: number = 5; // Numero di elementi per pagina
-  currentPage: number = 1; // Pagina corrente
+  paginatedQaList: QA[] = [];
+  pageSize: number = 5;//
+  currentPage: number = 1;
 
   size: NzButtonSize = 'large';
 
@@ -40,7 +43,6 @@ export class ListaComponent {
   setHeader(): void{
     const links:NavLink[] = [
       { path: '/', label: 'Vai alla pagina del home' },
-      { path: '/form', label: 'Vai alla pagina del form' },
       { path: '/test', label: 'Vai alla pagina del test' },
     ];
     const pageName = "Lista";
@@ -63,7 +65,7 @@ export class ListaComponent {
     if (updatedQuestion && updatedAnswer && (updatedQuestion != this.qaList[globalIndex].domanda || updatedAnswer != this.qaList[globalIndex].rispostaAttesa) ) {
       this.loading = true;
       const updatedData = {
-        id: globalIndex, // ID della coppia da modificare
+        id: globalIndex,
         new_question: updatedQuestion,
         new_answer: updatedAnswer
       };
@@ -138,6 +140,7 @@ export class ListaComponent {
       }
     });
   }
+
   updatePaginatedList() {
     //console.log('Loaded currentPage:', this.currentPage);
     const startIndex = (this.currentPage - 1) * this.pageSize;
@@ -148,10 +151,22 @@ export class ListaComponent {
     //console.log('Loaded qaList:', this.qaList);
     //console.log('Loaded paginatedQaList List:', this.paginatedQaList);
   }
+
   onPageChange(page: number) {
     this.currentPage = page;
     //console.log('Loaded page:', page);
     this.updatePaginatedList();
   }
-  
+
+  onQaSubmitted(data: { domanda: string; risposta: string }): void {   
+    this.qaList.push({
+      domanda: data.domanda,
+      rispostaAttesa: data.risposta
+    });
+    this.updatePaginatedList();
+  }
+
+  setLoading(isLoading: boolean): void {
+    this.loading = isLoading;
+  }
 }
