@@ -1,5 +1,6 @@
 import sys
 import os
+import time
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from backend.model.dataset_model import Dataset_model
 from backend.model.LLM_model import LLM_model
@@ -22,7 +23,7 @@ class Controller:
     def ask(self, questions:list[str]) -> list[str]:
         return self.api_llm.ask(questions)
     
-    def categorize(self, questions:list[str], true_answers:list[str], generated_answers:list[str]) -> list[dict]:
+    def categorize(self, questions:list[str], true_answers:list[str], generated_answers:list[str]) -> list[dict[str, str, str, float]]:
         return self.similarity.categorize(questions, true_answers, generated_answers)
     
     def save(self, data) -> dict[str, bool, str, str]:

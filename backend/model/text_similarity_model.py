@@ -55,10 +55,10 @@ class Text_Similarity_model:
         return similarity
     
 
-    def categorize(self, questions:list[str], true_answers:list[str], generated_answers:list[str]) -> list[dict]:
-        results:list[dict] = []
-
+    def categorize(self, questions:list[str], true_answers:list[str], generated_answers:list[str]) -> list[dict[str, str, str, float]]:
+        results:list[dict[str, str, str, float]] = []
         if len(true_answers) != len(generated_answers):
+            print("qui")
             return results
         
         for i in range(len(true_answers)):

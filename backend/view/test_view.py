@@ -21,8 +21,6 @@ class Test_view:
         deviation:float = Controller().get_deviation(similarityes)
         sets_similarity:list[dict[str, float, str, float, str, int]] = Controller().get_classes_of_similarity(similarityes, 5)
         result:dict[float, float, list[dict[str, float, str, float, str, int]], list[dict[str, str, str, float]]] = {'average':average, 'deviation':deviation, 'sets_similarity':sets_similarity, 'couples':datas}
-        print("######################")
-        print(result)
         return jsonify(result)
 
     @staticmethod

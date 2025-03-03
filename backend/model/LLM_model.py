@@ -1,4 +1,5 @@
-from g4f.client import Client
+#from g4f.client import Client
+from google import genai
 import ast
 
 class LLM_model:
@@ -13,28 +14,21 @@ class LLM_model:
         return extracted_list
 
     def ask(self, questions:list[str]) -> list[str]:
-        client:Client = Client()
+        client = genai.Client(api_key="AIzaSyC9ogTzdhtUCc8XjxEDwvfIL6uv58rojt4")
         answers:list[str] = []
         index:int = 0
         subdivisions:int = 3
+        tmp_subseq:list[str] = []
         
         while index<len(questions):
             sub_questions_set:list[str] = questions[index:(len(questions)//subdivisions)+index]
-            joined_questions:str = "\n".join(sub_questions_set)
-            question:str = f"rispondi alle seguente domande nella lingua in cui sono scritte in una unica lista formato python list [str, str, ..]: {joined_questions}"
-            response = client.chat.completions.create(
-                model="gpt-4o",
-                messages=[{"role": "user", "content": question}],
-                web_search = False
+            instruction:str = "rispondi alle seguente domande nella lingua in cui sono scritte in una unica lista formato python list [str, str, ..]"
+            question:str = f"{sub_questions_set}"
+            response = client.models.generate_content(
+                model="gemini-2.0-flash", contents=f"{instruction}: {question}"
             )
-            #print(response.choices[0].message.content)
-            tmp = self.string_to_list_conv(response.choices[0].message.content)
+            response = response.text
+            tmp = self.string_to_list_conv(response)
             answers += tmp
-            #print("###################################################")
-            #print("lunghezza dataset:", len(sub_questions_set), f"da {index} a {(len(questions)//subdivisions)+index}")
-            #print("lista:",tmp)
-            #print("###################################################")
             index += len(sub_questions_set)
-        #print("###################################################")
-        #print("ANSWERS:",answers, "type:", type(answers))
         return answers
