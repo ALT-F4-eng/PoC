@@ -1,0 +1,39 @@
+<form class="custom-form" [formGroup]="form" (ngSubmit)="submitForm()">
+  <div class="item-container">
+    <div class="form-item">
+      <label class="form-label">Domanda</label>
+      <div class="form-control">
+        <div class="textarea-container">
+          <textarea 
+            formControlName="domanda" 
+            class="form-textarea" 
+            rows="4" 
+            placeholder="Inserisci la domanda"
+            maxlength="2000"
+          ></textarea>
+          <span class="char-counter">0/2000</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-item">
+      <label class="form-label">Risposta</label>
+      <div class="form-control">
+        <div class="textarea-container">
+          <textarea 
+            formControlName="risposta" 
+            class="form-textarea" 
+            rows="4" 
+            placeholder="Inserisci la risposta"
+            maxlength="2000"
+          ></textarea>
+          <span class="char-counter">0/2000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="submit-button">Salva</button>
+  </div>
+</form><!---->
