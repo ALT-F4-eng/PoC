@@ -2,8 +2,9 @@ import json
 import os
 
 class Dataset_model:
-    def __init__(self, path:str="./backend/model/Dataset/dataset.json"):  
-        self.path:str = path
+    def __init__(self, path:str=r"C:\Users\peric\Desktop\uni\SWE\PoC\backend\model\Dataset\dataset.json"):
+        self.path = path
+
 
     def load_json(self) -> list[dict[str, str]]:
         with open(self.path, 'r', encoding='utf-8') as file:

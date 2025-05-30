@@ -13,23 +13,5 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 
-@NgModule({
-    declarations: [
-      AppComponent,
-      HomeComponent,
-      FormComponent,
-      ListaComponent,
-      HeaderComponent,
-      FooterComponent
-    ],
-    imports: [
-      BrowserModule,
-      BrowserAnimationsModule,  
-      NzFormModule,
-      ReactiveFormsModule,
-      RouterModule.forRoot([])
-    ],
-    
-    bootstrap: [AppComponent]//FormComponent, ListaComponent, 
-  })
-  export class AppModule { }
+// This file is no longer needed if using standalone components and bootstrapApplication.
+// You can safely delete this file or leave it empty if all components are standalone.
